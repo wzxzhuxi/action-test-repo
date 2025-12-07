@@ -31,8 +31,14 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure --config Release
+      - name: Run tests (Unix)
+        if: runner.os != 'Windows'
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Run tests (Windows)
+        if: runner.os == 'Windows'
+        working-directory: build
+        run: ctest --output-on-failure -C Release
 
   coverage:
     runs-on: ubuntu-latest
