@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check clang-format
-        run: find src include -name '*.cpp' -o -name '*.hpp' | xargs clang-format --dry-run --Werror 2>/dev/null || true
+        run: find src include -name '*.cpp' -o -name '*.hpp' | xargs clang-format --dry-run --Werror
 
   build:
     strategy:

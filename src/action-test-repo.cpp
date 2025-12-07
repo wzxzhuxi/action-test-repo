@@ -1,6 +1,6 @@
 #include "action-test-repo/action-test-repo.hpp"
 
-namespace action-test-repo {
+namespace action_test_repo {
 
 auto greet(std::string_view name) -> std::string {
     return std::string("Hello, ") + std::string(name) + "!";
@@ -15,7 +15,8 @@ auto parse_int(std::string_view input) -> Result<int> {
         size_t pos = 0;
         int result = std::stoi(std::string(input), &pos);
         if (pos != input.size()) {
-            return Result<int>::err("Invalid integer: trailing characters in '" + std::string(input) + "'");
+            return Result<int>::err("Invalid integer: trailing characters in '" +
+                                    std::string(input) + "'");
         }
         return Result<int>::ok(result);
     } catch (const std::exception&) {
@@ -23,4 +24,4 @@ auto parse_int(std::string_view input) -> Result<int> {
     }
 }
 
-} // namespace action-test-repo
+} // namespace action_test_repo

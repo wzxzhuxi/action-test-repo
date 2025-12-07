@@ -17,7 +17,7 @@ cmake --build build
 #include "action-test-repo/action-test-repo.hpp"
 
 int main() {
-    auto msg = action-test-repo::hello();
+    auto msg = action_test_repo::hello();
     return 0;
 }
 ```

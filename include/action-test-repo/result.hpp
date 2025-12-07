@@ -3,7 +3,7 @@
 #include <string>
 #include <variant>
 
-namespace action-test-repo {
+namespace action_test_repo {
 
 /**
  * @brief Result<T> - Functional error handling monad
@@ -19,9 +19,8 @@ namespace action-test-repo {
  *       handle_error(result.error());
  *   }
  */
-template<typename T>
-class Result {
-public:
+template <typename T> class Result {
+  public:
     static auto ok(T value) -> Result { return Result{std::move(value)}; }
     static auto err(std::string error) -> Result { return Result{std::move(error)}; }
 
@@ -34,8 +33,7 @@ public:
     /**
      * @brief Transform the value if Ok, propagate error if Err
      */
-    template<typename F>
-    auto map(F&& f) const -> Result<decltype(f(std::declval<T>()))> {
+    template <typename F> auto map(F&& f) const -> Result<decltype(f(std::declval<T>()))> {
         using U = decltype(f(std::declval<T>()));
         if (is_ok()) {
             return Result<U>::ok(f(value()));
@@ -46,19 +44,18 @@ public:
     /**
      * @brief Chain operations that return Result
      */
-    template<typename F>
-    auto and_then(F&& f) const -> decltype(f(std::declval<T>())) {
+    template <typename F> auto and_then(F&& f) const -> decltype(f(std::declval<T>())) {
         if (is_ok()) {
             return f(value());
         }
         return decltype(f(std::declval<T>()))::err(error());
     }
 
-private:
+  private:
     explicit Result(T val) : data_(std::move(val)) {}
     explicit Result(std::string err) : data_(std::move(err)) {}
 
     std::variant<T, std::string> data_;
 };
 
-} // namespace action-test-repo
+} // namespace action_test_repo

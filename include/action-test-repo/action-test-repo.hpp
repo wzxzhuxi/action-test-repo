@@ -5,7 +5,7 @@
 
 #include "action-test-repo/result.hpp"
 
-namespace action-test-repo {
+namespace action_test_repo {
 
 // =============================================================================
 // Pure Functions - No side effects, same input always produces same output
@@ -27,4 +27,4 @@ auto add(int a, int b) -> int;
  */
 auto parse_int(std::string_view input) -> Result<int>;
 
-} // namespace action-test-repo
+} // namespace action_test_repo
